@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Terminal Interactiva - Ixent</title>
+    <style>
+      body {
+        background-color: #0c0c0c;
+        color: #0f0;
+        font-family: "Courier New", Courier, monospace;
+        padding: 20px;
+        font-size: 16px;
+      }
+      #terminal {
+        width: 100%;
+        height: 90vh;
+        overflow-y: auto;
+      }
+      .command-line {
+        display: flex;
+      }
+      .prompt {
+        margin-right: 10px;
+        color: #0f0;
+        font-weight: bold;
+      }
+      input {
+        background: transparent;
+        border: none;
+        color: #0f0;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 16px;
+        outline: none;
+        flex-grow: 1;
+      }
+      .output {
+        margin-bottom: 15px;
+        color: #ddd;
+        line-height: 1.5;
+      }
+      .highlight {
+        color: #0f0;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="terminal">
+      <div>Benvingut a IXENT_OS v1.0</div>
+      <div>Inici de sessió correcte. El sistema està llest.</div>
+      <br />
+      <div>
+        Escriu <span class="highlight">help</span> per veure les comandes
+        disponibles.
+      </div>
+      <br />
+      <div id="output-container"></div>
+      <div class="command-line">
+        <span class="prompt">root@ixent-asix:~$</span>
+        <input type="text" id="cmd" autocomplete="off" autofocus />
+      </div>
+    </div>
+
+    <script>
+      const input = document.getElementById("cmd");
+      const outputContainer = document.getElementById("output-container");
+
+      document.addEventListener("click", () => input.focus());
+
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          const command = input.value.trim().toLowerCase();
+          processCommand(command);
+          input.value = "";
+        }
+      });
+
+      function processCommand(cmd) {
+        let response = "";
+
+        switch (cmd) {
+          case "help":
+            response =
+              "Comandes disponibles:<br>" +
+              "- <span class='highlight'>whoami</span>: Mostra informació personal i perfil professional.<br>" +
+              "- <span class='highlight'>experiencia</span>: Mostra la trajectòria laboral i funcions.<br>" +
+              "- <span class='highlight'>educacio</span>: Llista la formació acadèmica detallada.<br>" +
+              "- <span class='highlight'>skills</span>: Mostra les competències tècniques i transversals.<br>" +
+              "- <span class='highlight'>idiomes</span>: Mostra el nivell d'idiomes.<br>" +
+              "- <span class='highlight'>altres</span>: Informació addicional i interessos.<br>" +
+              "- <span class='highlight'>clear</span>: Neteja la pantalla del terminal.";
+            break;
+          case "whoami":
+            response =
+              "Nom: Ixent Casamajor Pascual.<br>" +
+              "Data de naixement: 01/12/2004.<br>" +
+              "Ubicació: Sant Pau d'Ordal (Barcelona).<br><br>" +
+              "Perfil: Candidat a Tècnic/a Superior Informàtic de Xarxes.<br>" +
+              "Objectiu: La meva inquietud professional es focalitza en el sector de la ciberseguretat, orientant la meva formació i futur laboral cap a la protecció d'entorns digitals i la integritat de les dades.";
+            break;
+          case "experiencia":
+            response =
+              "Carregant historial laboral...<br><br>" +
+              "1. <b>Mosso de magatzem</b> a Privalia (Santa Oliva) [07/2026-08/2026].<br>" +
+              "   └ Funcions: Manipulació de productes tèxtils i transport de materials pesants.<br><br>" +
+              "2. <b>Cuiner</b> a VIPS (Saragossa) [02/2025-04/2025].<br>" +
+              "   └ Funcions: Manipulació de productes freds, ús de fregidora i servei de planxa.<br><br>" +
+              "3. <b>Cambrer</b> a Playas de Capdepera (Illes Balears) [2023-2025].<br>" +
+              "   └ Funcions: Atenció al client, elaboració de cocteleria, gestió de barra i terrasses sota pressió.";
+            break;
+          case "educacio":
+            response =
+              "Carregant expedients acadèmics...<br><br>" +
+              "- <b>Grau Superior en ASIX</b>: IES Eugeni d'Ors (En curs). Administració de sistemes, ciberseguretat i gestió de hardware/software.<br>" +
+              "- <b>Certificat Personalització Entorn Linux</b>: Acadèmia Hack4You (2026).<br>" +
+              "- <b>Batxillerat en Ciències Socials (EUA)</b>: Richmond Heights High School (2021-2022). Immersió total en llengua anglesa.<br>" +
+              "- <b>Batxillerat en Ciències Socials</b>: Intermunicipal del Penedès (2020-2021).<br>" +
+              "- <b>Grau en Dret</b>: Universitat de Saragossa (2020-2021, un curs).<br>" +
+              "- <b>Graduat en ESO</b>: IES Jacint Verdaguer (2016-2020).";
+            break;
+          case "skills":
+            response =
+              "<u>COMPETÈNCIES DIGITALS I TÈCNIQUES:</u><br>" +
+              "Domini en administració de sistemes, gestió de xarxes, hardware i ofimàtica. Rigor tècnic en ciberseguretat assolit amb la formació i perfil metòdic reforçat durant els estudis de dret.<br><br>" +
+              "<u>HABILITATS TRANSVERSALS:</u><br>" +
+              "Resolució de problemes de forma autònoma i perfil organitzat en l'execució de tasques tècniques. Gran capacitat de treball en equip en entorns sota pressió, empatia, fluïdesa comunicativa i gestió d'usuaris.";
+            break;
+          case "idiomes":
+            response =
+              "<u>NIVELLS LINGÜÍSTICS:</u><br>" +
+              "- <b>Català:</b> Nadiu<br>" +
+              "- <b>Castellà:</b> Nadiu<br>" +
+              "- <b>Anglès:</b> B2 (Fluïdesa assolida en gran part gràcies a la immersió acadèmica als EUA)<br>" +
+              "- <b>Alemany:</b> A1";
+            break;
+          case "altres":
+            response =
+              "<u>INFORMACIÓ ADDICIONAL:</u><br>" +
+              "- Permís de conduir tipus B.<br>" +
+              "- Entusiasta de la innovació en hardware i experimentació amb aparells electrònics per maximitzar recursos.<br>" +
+              "- Formació i pràctica autodidacta en la programació de videojocs.<br>" +
+              "- Gran disponibilitat per a la incorporació en entorns laborals o de pràctiques.";
+            break;
+          case "clear":
+            outputContainer.innerHTML = "";
+            return;
+          case "":
+            return;
+          default:
+            response =
+              "Comanda no reconeguda: '" +
+              cmd +
+              "'. Escriu 'help' per veure la llista de comandes vàlides.";
+        }
+
+        const prevCommand =
+          "<div class='command-line'><span class='prompt'>root@ixent-asix:~$</span><span>" +
+          cmd +
+          "</span></div>";
+        const outDiv = "<div class='output'>" + response + "</div><br>";
+
+        outputContainer.innerHTML += prevCommand + outDiv;
+        window.scrollTo(0, document.body.scrollHeight);
+      }
+    </script>
+  </body>
+</html>
